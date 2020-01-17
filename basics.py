@@ -16,7 +16,7 @@ elif x == "m":
     b = 20
     c = a*b
     print("{} * {} = {}".format(a, b, c))
-else:
+else
     print("The command '{}' is not recognized.".format(x))
 print("Done")
 
