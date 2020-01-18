@@ -7,25 +7,35 @@ def add(x, y):
 
 def sub(x, y):
     z = x - y
-    print("{} - {} = {}".format(x, y, z))
-    return z
+    symbol = "-"
+    return z, symbol
 def mult(x, y):
     z = x * y
-    if z > 100:
-        return z
-    print("{} * {} = {}".format(x, y, z))
+    symbol = "*"
+    return z, symbol
+def div(x, y):
+    z = x/y
+    symbol = "/"
+    return z, symbol
 
 x = input("Enter a letter: ")
 print("You entered {}".format(x))
 if x == "a":
-    d, f = add(56, 73)
-    print("{} {} {} = {}".format(57, f, 73, d))
+    d, f = add(47, 7)
+    print("{} {} {} = {}".format(47, f, 7, d))
     if d is None:
        print("I forgot a variable in add()")
 elif x == "s":
-   e = sub(56, 73)
+   e, g = sub(47, 7)
+   print("{} {} {} = {}".format(47, g, 7, e))
+   if e is None:
+       print("I forgot a variable in add()")
 elif x == "m":
-    f = mult(56, 73)
+    ii, jj = mult(47, 7)
+    print("{} {} {} = {}".format(47, jj, 7, ii))
+elif x == 'd':
+    o, p = div(47, 7)
+    print("{} {} {} = {}".format(47, p, 7, o))
 else:
     print("The command '{}' is not recognized.".format(x))
 print("Done")
