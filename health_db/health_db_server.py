@@ -45,7 +45,6 @@ def verify_new_patient_information(in_dict):
     return True
 
 
-
 if __name__ == '__main__':
     init_database()
     app.run()
