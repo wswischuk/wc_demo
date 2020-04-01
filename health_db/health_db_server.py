@@ -33,11 +33,6 @@ def post_new_patient():
         return check_result, 400
     add_patient_to_db(in_dict["name"], in_dict["id"], in_dict["age"])
     return "Patient added", 200
-    add_result = add_test_to_patient(in_dict)
-    if add_result:
-        return "Test added to patient id {}".format(in_dict["id"]), 200
-    else:
-        return "Unknown Problem", 400
 
 
 def verify_new_patient_information(in_dict):
@@ -67,10 +62,14 @@ def post_add_test():
         return check_result, 400
     if is_patient_in_database(in_dict["id"]) is False:
         return "Patient {} is not found on server".format(in_dict["id"]), 400
-
+    add_result = add_test_to_patient(in_dict)
+    if add_result:
+        return "Test added to patient id {}".format(in_dict["id"]), 200
+    else:
+        return "Unknown Problem", 400
 
 def verify_add_test_information(in_dict):
-    expected_keys = ("id", "test_name", "test_results")
+    expected_keys = ("id", "test_name", "test_result")
     expected_types = (int, str, int)
     for i, key in enumerate(expected_keys):
         if key not in in_dict.keys():
@@ -94,6 +93,41 @@ def add_test_to_patient(in_dict):
                                      in_dict["test_result"]))
             print("db is {}".format(db))
             return True
+    return False
+
+
+@app.route("/get_results/<patient_id>", methods=["GET"])
+def get_get_results(patient_id):
+    check_result = verify_get_results_input(patient_id)
+    if type(check_result) is str:
+        return check_result, 400
+    answer = generate_test_results_string(check_result)
+    if answer is False:
+        return "Unknown Error", 400
+    else:
+        return answer, 200
+
+
+def verify_get_results_input(patient_id):
+    try:
+        id = int(patient_id)
+    except ValueError:
+        return "Bad patient id in URL"
+    if is_patient_in_database(id) is False:
+        return "Patient id {} does not exist in database".format(id)
+    return id
+
+
+def generate_test_results_string(patient_id):
+    for patient in db:
+        if patient["id"] == patient_id:
+            if len(patient["tests"]) == 0:
+                return "No test results available."
+            out_string = ""
+            for test_results in patient["tests"]:
+                out_string += "{}: {}".format(test_results[0],
+                                              test_results[1])
+            return out_string
     return False
 
 
