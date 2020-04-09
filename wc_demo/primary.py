@@ -1,4 +1,5 @@
 from pymodm import connect, MongoModel, fields
+import other_module
 
 
 class Person(MongoModel):
@@ -26,3 +27,5 @@ def add_person_to_database(first_name_arg, last_name_arg, age_arg):
 if __name__ == '__main__':
     init_db()
     add_person_to_database("Ann", "Ables", 35)
+    other_module.add_another_person_to_database()
+    other_module.get_all_people()

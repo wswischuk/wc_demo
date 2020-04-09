@@ -1,4 +1,5 @@
 # calculator.py
+import.math
 
 def add(x, y):
     z = x + y
@@ -17,6 +18,10 @@ def div(x, y):
     z = x/y
     symbol = "/"
     return z, symbol
+#def square_root(x):
+#    import math
+#    z = math.sqrt(x)
+#    return z
 
 x = input("Enter First Number: ")
 x = float(x)
@@ -44,6 +49,9 @@ elif L == 'd':
     print("You entered {} for division.".format(L))
     o, p = div(x, y)
     print("{} {} {} = {}".format(x, p, y, o))
+#elif L == 'q':
+#    answer = square_root(int(x))
+#    print("{}".format(answer))
 else:
     print("The command '{}' is not recognized.".format(L))
 print("Done")
