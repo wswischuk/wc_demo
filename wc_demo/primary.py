@@ -1,12 +1,7 @@
-from pymodm import connect, MongoModel, fields
+from pymodm import connect
 import other_module
 
-
-class Person(MongoModel):
-    first_name = fields.CharField()
-    last_name = fields.CharField()
-    age = fields.IntegerField()
-
+from database import Person
 
 def init_db():
     print("Connecting to database...")

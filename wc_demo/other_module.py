@@ -1,10 +1,4 @@
-from pymodm import MongoModel, fields
-
-
-class Person(MongoModel):
-    first_name = fields.CharField()
-    last_name = fields.CharField()
-    age = fields.IntegerField()
+from database import Person
 
 
 def add_another_person_to_database():
